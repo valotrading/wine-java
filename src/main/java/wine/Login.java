@@ -49,7 +49,7 @@ public class Login extends AbstractMessage implements StringMessage {
     }
 
     @Override
-    public void apply(MessageVisitor visitor) {
+    public void accept(MessageVisitor visitor) {
         visitor.visit(this);
     }
 

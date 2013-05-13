@@ -16,5 +16,5 @@
 package wine;
 
 public interface Message extends Element {
-    void apply(MessageVisitor visitor);
+    void accept(MessageVisitor visitor);
 }

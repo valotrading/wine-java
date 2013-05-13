@@ -39,7 +39,7 @@ public class Get extends AbstractMessage {
     }
 
     @Override
-    public void apply(MessageVisitor visitor) {
+    public void accept(MessageVisitor visitor) {
         visitor.visit(this);
     }
 

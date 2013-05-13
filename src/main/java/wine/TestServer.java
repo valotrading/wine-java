@@ -91,7 +91,7 @@ public class TestServer {
         }
 
         private void handle(final Connection<Message> connection, Message message) {
-            message.apply(new MessageVisitor() {
+            message.accept(new MessageVisitor() {
                 @Override
                 public void visit(Login message) {
                     send(connection, new LoginAccepted());

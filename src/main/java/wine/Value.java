@@ -26,7 +26,7 @@ public class Value extends KeyValueMessage {
     }
 
     @Override
-    public void apply(MessageVisitor visitor) {
+    public void accept(MessageVisitor visitor) {
         visitor.visit(this);
     }
 
