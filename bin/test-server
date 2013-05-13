@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+if [ -z "$JAVACMD" ]; then
+  if [ -z "$JAVA_HOME" ]; then
+    JAVACMD="java"
+  else
+    JAVACMD="$JAVA_HOME/bin/java"
+  fi
+fi
+
+$JAVACMD $JAVA_OPTS -jar "target/wine-0.1.0-SNAPSHOT-jar-with-dependencies.jar" $@
