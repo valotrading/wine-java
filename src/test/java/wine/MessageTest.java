@@ -24,6 +24,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import silvertip.GarbledMessageException;
+import silvertip.PartialMessageException;
 
 public class MessageTest {
     private static final Charset CHARSET = Charset.forName("US-ASCII");
@@ -161,6 +162,13 @@ public class MessageTest {
         Message expected = new Set(new byte[] { 'f', 'o', 'o' }, new byte[] { 'q', 'u', 'u', 'x' });
 
         assertEquals(expected, parse(message));
+    }
+
+    @Test
+    public void partialMessageWithoutMessageType() throws Exception {
+        thrown.expect(PartialMessageException.class);
+
+        parse(new byte[] {});
     }
 
     @Test
