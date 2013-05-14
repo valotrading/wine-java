@@ -94,7 +94,7 @@ public class TestServer {
             message.accept(new MessageVisitor() {
                 @Override
                 public void visit(Login message) {
-                    send(connection, new LoginAccepted());
+                    connection.send(new LoginAccepted().format());
                 }
 
                 @Override
@@ -113,7 +113,7 @@ public class TestServer {
                     if (value == null)
                         value = Collections.emptyList();
 
-                    send(connection, new Value(message.key(), toArray(value)));
+                    connection.send(new Value(message.key(), toArray(value)).format());
                 }
 
                 @Override
@@ -136,16 +136,6 @@ public class TestServer {
                     return ArrayUtils.toPrimitive(bytes.toArray(new Byte[0]));
                 }
             });
-        }
-
-        private void send(Connection<Message> connection, Message message) {
-            byte[]     bytes  = new byte[message.length()];
-            ByteBuffer buffer = ByteBuffer.wrap(bytes);
-
-            message.format(buffer);
-            buffer.flip();
-
-            connection.send(buffer);
         }
     }
 

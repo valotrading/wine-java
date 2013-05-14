@@ -17,4 +17,6 @@ package wine;
 
 public interface Message extends Element {
     void accept(MessageVisitor visitor);
+
+    byte[] format();
 }

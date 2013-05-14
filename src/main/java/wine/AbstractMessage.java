@@ -71,6 +71,16 @@ abstract class AbstractMessage implements Message {
     }
 
     @Override
+    public byte[] format() {
+        byte[]     bytes  = new byte[length()];
+        ByteBuffer buffer = ByteBuffer.wrap(bytes);
+
+        format(buffer);
+
+        return bytes;
+    }
+
+    @Override
     public void parse(ByteBuffer buffer) {
     }
 
