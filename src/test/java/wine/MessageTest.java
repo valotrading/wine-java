@@ -172,6 +172,13 @@ public class MessageTest {
     }
 
     @Test
+    public void partialMessageWithoutLengthField() throws Exception {
+        thrown.expect(PartialMessageException.class);
+
+        parse(new byte[] { 'G' });
+    }
+
+    @Test
     public void unknownMessageType() throws Exception {
         thrown.expect(GarbledMessageException.class);
         thrown.expectMessage("Unexpected message type X");
