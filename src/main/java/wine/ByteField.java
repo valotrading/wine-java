@@ -64,15 +64,7 @@ class ByteField extends AbstractField {
 
         byte[] thatValue = ((ByteField) that).value;
 
-        if (thatValue.length != this.value.length)
-            return false;
-
-        for (int i = 0; i < thatValue.length; i++) {
-            if (thatValue[i] != this.value[i])
-                return false;
-        }
-
-        return true;
+        return Arrays.equals(thatValue, this.value);
     }
 
     @Override
