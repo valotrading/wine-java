@@ -17,7 +17,6 @@ package wine;
 
 import java.nio.ByteBuffer;
 import java.util.Arrays;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 class ByteField extends AbstractField {
     private final LengthField lengthField = new LengthField(this);
@@ -69,7 +68,7 @@ class ByteField extends AbstractField {
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(value).toHashCode();
+        return Arrays.hashCode(value);
     }
 
     @Override
