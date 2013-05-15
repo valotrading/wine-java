@@ -174,7 +174,7 @@ public class TestServer {
     }
 
     private static void info(String message) {
-        System.out.println(String.format("wine-server: info: %s", message));
+        System.out.println(String.format("wine-test-server: info: %s", message));
     }
 
     private static void usage() {
