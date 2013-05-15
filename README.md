@@ -2,7 +2,10 @@ Wine for Java
 =============
 
 Wine is a protocol for configuring and monitoring agents. Wine for Java is an
-implementation of the protocol for JVM agents.
+implementation of the protocol for JVM agents, and there is [Wine for Ruby][]
+as well.
+
+  [Wine for Ruby]: http://github.com/valotrading/wine-ruby
 
 
 Development
