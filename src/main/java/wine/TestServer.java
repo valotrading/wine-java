@@ -19,12 +19,9 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
-import org.apache.commons.lang3.ArrayUtils;
 import silvertip.Connection;
 import silvertip.Events;
 import silvertip.Server;
@@ -39,7 +36,7 @@ public class TestServer {
         if (port == 0)
             usage();
 
-        Map<List<Byte>, List<Byte>> config = new HashMap<List<Byte>, List<Byte>>();
+        Map<ByteString, ByteString> config = new HashMap<ByteString, ByteString>();
 
         final Callback callback = new Callback(config);
 
@@ -62,9 +59,9 @@ public class TestServer {
     }
 
     private static class Callback implements Connection.Callback<Message> {
-        private Map<List<Byte>, List<Byte>> config;
+        private Map<ByteString, ByteString> config;
 
-        public Callback(Map<List<Byte>, List<Byte>> config) {
+        public Callback(Map<ByteString, ByteString> config) {
             this.config = config;
         }
 
@@ -107,13 +104,13 @@ public class TestServer {
 
                 @Override
                 public void visit(Get message) {
-                    List<Byte> key   = asList(message.key());
-                    List<Byte> value = config.get(key);
+                    ByteString key   = new ByteString(message.key());
+                    ByteString value = config.get(key);
 
                     if (value == null)
-                        value = Collections.emptyList();
+                        value = new ByteString();
 
-                    connection.send(new Value(message.key(), toArray(value)).format());
+                    connection.send(new Value(key.toArray(), value.toArray()).format());
                 }
 
                 @Override
@@ -122,20 +119,49 @@ public class TestServer {
 
                 @Override
                 public void visit(Set message) {
-                    List<Byte> key   = asList(message.key());
-                    List<Byte> value = asList(message.value());
+                    ByteString key   = new ByteString(message.key());
+                    ByteString value = new ByteString(message.value());
 
                     config.put(key, value);
                 }
-
-                private List<Byte> asList(byte[] bytes) {
-                    return Arrays.asList(ArrayUtils.toObject(bytes));
-                }
-
-                private byte[] toArray(List<Byte> bytes) {
-                    return ArrayUtils.toPrimitive(bytes.toArray(new Byte[0]));
-                }
             });
+        }
+    }
+
+    private static class ByteString {
+        private final byte[] value;
+
+        public ByteString() {
+            this(new byte[] {});
+        }
+
+        public ByteString(byte[] value) {
+            this.value = value;
+        }
+
+        @Override
+        public boolean equals(Object that) {
+            if (that == null)
+                return false;
+
+            if (that == this)
+                return true;
+
+            if (that.getClass() != this.getClass())
+                return false;
+
+            byte[] thatValue = ((ByteString) that).value;
+
+            return Arrays.equals(thatValue, this.value);
+        }
+
+        @Override
+        public int hashCode() {
+            return Arrays.hashCode(value);
+        }
+
+        public byte[] toArray() {
+            return value;
         }
     }
 
