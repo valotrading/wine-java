@@ -2,13 +2,13 @@ Wine for Java
 =============
 
 Wine is a protocol for configuring and monitoring agents. Wine for Java is an
-implementation of the protocol for the JVM.
+implementation of the protocol for JVM agents.
 
 
 Development
 -----------
 
-Package the software:
+Package Wine for Java:
 
     mvn package
 
@@ -20,4 +20,4 @@ Run the test server:
 License
 -------
 
-Wine is released under the Apache License, Version 2.0.
+Wine for Java is released under the Apache License, Version 2.0.
