@@ -14,7 +14,7 @@ Package the software:
 
 Run the test server:
 
-    bin/test-server
+    bin/wine-test-server
 
 
 License

@@ -178,7 +178,7 @@ public class TestServer {
     }
 
     private static void usage() {
-        System.err.println("Usage: test-server <port>");
+        System.err.println("Usage: wine-test-server <port>");
         System.exit(2);
     }
 
